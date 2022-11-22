@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Word Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link type="text/css" rel="stylesheet" href="styles/main.css" />
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="container">
+            <h2 class="title">Word association</h2>
+            <p>
+              Stage: <span id="stage_indicator">1</span> Level:
+              <span id="level_indicator">1</span>
+            </p>
+          </div>
+          <div class="container" id="option">
+            <div class="word_container two_column_flex"><p>First word</p></div>
+            <div class="word_container two_column_flex"><p>Second word</p></div>
+          </div>
+          <div class="container column" id="quiz">
+            <div class="word_container one_column_flex"><p>First word</p></div>
+            <div class="word_container one_column_flex"><p>Second word</p></div>
+            <div class="word_container one_column_flex"><p>Third</p></div>
+          </div>
+          <div class="container">
+            <button class="button two_column_flex" id="reset_button">
+              Reset Game
+            </button>
+            <button class="button two_column_flex" id="next_button">
+              Next Level
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <script src="../src/index.js"></script>
+  </body>
+</html>
