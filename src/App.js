@@ -1,4 +1,4 @@
-import getData from './utility/getQuizWords'
+import getData from './utility/fetchQuiz'
 import './styles/main.css'
 
 const optionWords = document.querySelector('#option')
