@@ -16,6 +16,7 @@ const arrayOfQuizWords = Array.from(quizWords.children)
 let stage = 1
 let level = 1
 let quizlist = {}
+let quontityOfLife = 3
 
 startButton.addEventListener('click', startGame)
 resetButton.addEventListener('click', resetGame)
@@ -37,6 +38,9 @@ function resetGame() {
   stage = 1
   level = 1
   quizlist = {}
+  quontityOfLife = 3
+
+  restoreLife()
 }
 
 async function startGame() {
@@ -74,11 +78,22 @@ async function handleClick(e) {
   const correctAnswerId = currentQuiz.correct
   const buttonId = +e.target.dataset.id
 
-  if (buttonId !== correctAnswerId) {
-    level = level > 1 ? (level -= 1) : 1
-    removeLife()
-    renderQuiz()
+  if (!buttonId) {
     return
+  }
+
+  if (buttonId !== correctAnswerId) {
+    setTimeout(() => {
+      toggleClass([e.target], 'wrong_answer')
+    }, 250)
+
+    toggleClass([e.target], 'wrong_answer')
+
+    removeLife()
+    if (quontityOfLife < 1) {
+      resetGame()
+    }
+    renderQuiz()
   }
 
   level += 1
@@ -117,7 +132,23 @@ function toggleClass(elements, className) {
 }
 
 function removeLife() {
-  const brokenHeard = document.createElement('i')
-  brokenHeard.className = 'fa-solid fa-heart-crack red_heart'
-  liveContainer.appendChild(brokenHeard)
+  const wholeHeart = liveContainer.firstElementChild
+  const brokenHeart = document.createElement('i')
+  brokenHeart.className = 'fa-solid fa-heart-crack red_heart'
+
+  liveContainer.removeChild(wholeHeart)
+  liveContainer.appendChild(brokenHeart)
+
+  quontityOfLife -= 1
+}
+
+function restoreLife() {
+  for (let i = 0; i < quontityOfLife; i++) {
+    const wholeHeart = document.createElement('i')
+    const brokenHeart = liveContainer.firstElementChild
+
+    wholeHeart.className = 'fa-solid fa-heart red_heart'
+    liveContainer.removeChild(brokenHeart)
+    liveContainer.appendChild(wholeHeart)
+  }
 }

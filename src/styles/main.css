@@ -6,6 +6,7 @@
 }
 body {
   background-color: #1bb295;
+  color: #1bb295;
 }
 
 .wrapper {
@@ -19,7 +20,7 @@ body {
 }
 .container {
   width: 430px;
-  background: #fff;
+  background: #f0eac5;
   border-radius: 10px;
   margin: 25px 25px 0px;
   display: flex;
@@ -44,14 +45,14 @@ body {
   font-weight: 500;
   font-size: 1.2rem;
   background-color: #1bb295;
-  color: #fff;
+  color: #f0eac5;
 }
 .button {
   font-size: 17px;
   padding: 15px 25px;
   border: none;
   background-color: #1bb295;
-  color: #fff;
+  color: #f0eac5;
   border-radius: 5px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -70,8 +71,21 @@ body {
   font-size: 1.5rem;
   color: #e82727;
 }
-
 .font {
   font-weight: 500;
   font-size: 1.2rem;
+  color: #f7ca36;
+}
+
+.wrong_answer {
+  background-color: #e82727;
+}
+
+.correct_answer {
+  background-color: #1bb295;
+}
+
+.stage_count,
+.level_count {
+  color: #1bb295;
 }

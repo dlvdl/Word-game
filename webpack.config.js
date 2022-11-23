@@ -5,7 +5,7 @@ const LinkTypePlugin =
 
 module.exports = {
   mode: 'development',
-  entry: { bundle: path.resolve(__dirname, 'src/index.js') },
+  entry: { bundle: path.resolve(__dirname, 'src/App.js') },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
