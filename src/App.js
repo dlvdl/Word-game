@@ -69,8 +69,8 @@ async function updateGame(stage) {
     .then((res) => getQuiz(res))
 }
 
-const getQuiz = async (data) => {
-  quizlist = await data.quizlist
+const getQuiz = (data) => {
+  quizlist = data.quizlist
 }
 
 async function handleClick(e) {
