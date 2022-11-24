@@ -9,6 +9,7 @@ const resetButton = document.querySelector('#reset_button')
 const startButton = document.querySelector('#start_button')
 const progressContainer = document.querySelector('#progress_container')
 const liveContainer = document.querySelector('#live_container')
+const spinner = document.querySelector('#spinner')
 
 const arrayOfOptionWords = Array.from(optionWords.children)
 const arrayOfQuizWords = Array.from(quizWords.children)
@@ -17,6 +18,7 @@ let stage = 1
 let level = 1
 let quizlist = {}
 let quontityOfLife = 3
+let isLoading = true
 
 startButton.addEventListener('click', startGame)
 resetButton.addEventListener('click', resetGame)
@@ -44,6 +46,18 @@ function resetGame() {
 }
 
 async function startGame() {
+  toggleClass([spinner], 'disabled')
+
+  await getData(stage)
+    .then((res) => res.json())
+    .then((res) => getQuiz(res))
+    .finally(() => (isLoading = false))
+  renderQuiz()
+
+  if (!isLoading) {
+    toggleClass([spinner], 'disabled')
+  }
+
   toggleClass(
     [
       startButton,
@@ -55,18 +69,13 @@ async function startGame() {
     ],
     'disabled'
   )
-
-  await getData(stage)
-    .then((res) => res.json())
-    .then((res) => getQuiz(res))
-
-  renderQuiz()
 }
 
 async function updateGame(stage) {
   await getData(stage)
     .then((res) => res.json())
     .then((res) => getQuiz(res))
+    .finally(() => (isLoading = false))
 }
 
 const getQuiz = (data) => {
