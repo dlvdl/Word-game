@@ -103,6 +103,12 @@ async function handleClick(e) {
       resetGame()
     }
     renderQuiz()
+  } else {
+    setTimeout(() => {
+      toggleClass([e.target], 'correct_answer')
+    }, 250)
+
+    toggleClass([e.target], 'correct_answer')
   }
 
   level += 1
