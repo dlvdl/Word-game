@@ -26,7 +26,7 @@
       <div class="wrapper">
         <div class="container">
           <div class="container">
-            <h2 class="title">Word association game</h2>
+            <h2 class="title" id="title">Word association game</h2>
             <div
               class="container space_beetwen disabled"
               id="progress_container"
@@ -43,8 +43,11 @@
               </div>
             </div>
           </div>
-          <div class="container disabled" id="closed_display">
-            <p>GAME OVER</p>
+          <div class="container disabled closed_display" id="closed_display">
+            <h1>GAME OVER</h1>
+            <p id="total_score">
+              Your score: Stage <span>0</span> Level <span>0</span>
+            </p>
           </div>
           <div class="container spinner-1 disabled margin-1" id="spinner"></div>
           <div class="container disabled space_beetwen" id="option">

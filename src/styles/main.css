@@ -114,3 +114,7 @@ body {
 .margin-1 {
   margin: 30px 0px;
 }
+
+.closed_display {
+  color: #e82727;
+}

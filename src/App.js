@@ -10,6 +10,8 @@ const startButton = document.querySelector('#start_button')
 const progressContainer = document.querySelector('#progress_container')
 const liveContainer = document.querySelector('#live_container')
 const spinner = document.querySelector('#spinner')
+const gameOver = document.querySelector('#closed_display')
+const totalScore = document.querySelector('#total_score')
 
 const arrayOfOptionWords = Array.from(optionWords.children)
 const arrayOfQuizWords = Array.from(quizWords.children)
@@ -19,22 +21,28 @@ let level = 1
 let quizlist = {}
 let quontityOfLife = 3
 let isLoading = true
+let inGame = false
 
 startButton.addEventListener('click', startGame)
-resetButton.addEventListener('click', resetGame)
+resetButton.addEventListener('click', () => resetGame())
 optionWords.addEventListener('click', handleClick)
 
 function resetGame() {
-  toggleClass(
-    [
-      startButton,
-      resetButton,
-      optionWords,
-      quizWords,
-      progressContainer,
-      liveContainer,
-    ],
-    'disabled'
+  inGame = true
+  let listOfElements = [
+    startButton,
+    resetButton,
+    optionWords,
+    quizWords,
+    progressContainer,
+    liveContainer,
+    gameOver,
+  ]
+
+  toggleClass(listOfElements, 'disabled')
+
+  Array.from(totalScore.children).forEach((element, i) =>
+    i === 0 ? (element.innerHTML = stage) : (element.innerHTML = level)
   )
 
   stage = 1
@@ -46,6 +54,19 @@ function resetGame() {
 }
 
 async function startGame() {
+  let listOfElements = [
+    startButton,
+    resetButton,
+    optionWords,
+    quizWords,
+    progressContainer,
+    liveContainer,
+  ]
+
+  if (inGame) {
+    toggleClass([gameOver], 'disabled')
+  }
+
   toggleClass([spinner], 'disabled')
 
   await getData(stage)
@@ -54,21 +75,11 @@ async function startGame() {
     .finally(() => (isLoading = false))
   renderQuiz()
 
+  toggleClass(listOfElements, 'disabled')
+
   if (!isLoading) {
     toggleClass([spinner], 'disabled')
   }
-
-  toggleClass(
-    [
-      startButton,
-      resetButton,
-      optionWords,
-      quizWords,
-      progressContainer,
-      liveContainer,
-    ],
-    'disabled'
-  )
 }
 
 async function updateGame(stage) {
@@ -97,11 +108,13 @@ async function handleClick(e) {
     }, 250)
 
     toggleClass([e.target], 'wrong_answer')
-
     removeLife()
+
     if (quontityOfLife < 1) {
       resetGame()
+      return
     }
+
     renderQuiz()
   } else {
     setTimeout(() => {
@@ -110,7 +123,6 @@ async function handleClick(e) {
 
     toggleClass([e.target], 'correct_answer')
   }
-
   level += 1
 
   if (level > 10) {
